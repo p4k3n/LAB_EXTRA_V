@@ -114,6 +114,7 @@ class CrudPersonas : AppCompatActivity() {
                             intent.putExtra("posicion",position)
                             intent.putExtra("titulo","Editar usuario")
                             startActivity(intent)
+                            finish()
                             //personas.deletePerson(position)
                             //lista.adapter?.notifyItemRemoved(position)
 
@@ -157,6 +158,7 @@ class CrudPersonas : AppCompatActivity() {
             val intent2 = Intent(applicationContext, Form::class.java)
             intent2.putExtra("titulo","Agregar usuario")
             startActivity(intent2)
+            finish()
         }
 
 
