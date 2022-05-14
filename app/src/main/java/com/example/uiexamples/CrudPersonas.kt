@@ -1,5 +1,8 @@
 package com.example.uiexamples
 
+import android.app.PendingIntent.getActivity
+import android.content.Context
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
@@ -11,6 +14,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -18,6 +22,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uiexamples.ui.home.HomeFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -25,8 +30,11 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import java.util.*
 import kotlin.collections.ArrayList
 
+
+
 class CrudPersonas : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var homeFragment: HomeFragment
     var personas: Personas = Personas.instance
 
     lateinit var lista:RecyclerView
@@ -34,6 +42,7 @@ class CrudPersonas : AppCompatActivity() {
     lateinit var persona: Persona
     var archived = ArrayList<Persona>()
     var position: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +88,7 @@ class CrudPersonas : AppCompatActivity() {
                         return false
                     }
 
+
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                         position = viewHolder.adapterPosition
@@ -88,9 +98,9 @@ class CrudPersonas : AppCompatActivity() {
                             personas.deletePerson(position)
                             lista.adapter?.notifyItemRemoved(position)
 
-                            Snackbar.make(lista, persona.nombre + "Se eliminaría...", Snackbar.LENGTH_LONG).setAction("Undo") {
-                                personas.getPersonas().add(position, persona)
-                                lista.adapter?.notifyItemInserted(position)
+                            Snackbar.make(lista, persona.nombre + " eliminado.", Snackbar.LENGTH_LONG).setAction("Undo") {
+                                //personas.getPersonas().add(position, persona)
+                                //lista.adapter?.notifyItemInserted(position)
                             }.show()
                             adaptador = RecyclerView_Adapter(personas.getPersonas())
                             lista.adapter = adaptador
@@ -98,13 +108,19 @@ class CrudPersonas : AppCompatActivity() {
                             persona = Persona(personas.getPersonas()[position].user, personas.getPersonas()[position].password, personas.getPersonas()[position].nombre, personas.getPersonas()[position].foto)
                             archived.add(persona)
 
-                            personas.deletePerson(position)
-                            lista.adapter?.notifyItemRemoved(position)
+                            //personas.editPerson(Persona("david","123","david",2), position)
+                            val intent = Intent(applicationContext, Form::class.java)
+                            intent.putExtra("usuario",persona)
+                            intent.putExtra("posicion",position)
+                            intent.putExtra("titulo","Editar usuario")
+                            startActivity(intent)
+                            //personas.deletePerson(position)
+                            //lista.adapter?.notifyItemRemoved(position)
 
                             Snackbar.make(lista, persona.nombre + "Se editaría...", Snackbar.LENGTH_LONG).setAction("Undo") {
-                                archived.removeAt(archived.lastIndexOf(persona))
-                                personas.getPersonas().add(position, persona)
-                                lista.adapter?.notifyItemInserted(position)
+                                //archived.removeAt(archived.lastIndexOf(persona))
+                                //personas.getPersonas().add(position, persona)
+                                //lista.adapter?.notifyItemInserted(position)
                             }.show()
                             adaptador = RecyclerView_Adapter(personas.getPersonas())
                             lista.adapter = adaptador
