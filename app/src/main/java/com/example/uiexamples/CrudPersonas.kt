@@ -117,11 +117,11 @@ class CrudPersonas : AppCompatActivity() {
                             //personas.deletePerson(position)
                             //lista.adapter?.notifyItemRemoved(position)
 
-                            Snackbar.make(lista, persona.nombre + "Se editaría...", Snackbar.LENGTH_LONG).setAction("Undo") {
+                            //Snackbar.make(lista, persona.nombre + "Editable...", Snackbar.LENGTH_LONG).setAction("Undo") {
                                 //archived.removeAt(archived.lastIndexOf(persona))
                                 //personas.getPersonas().add(position, persona)
                                 //lista.adapter?.notifyItemInserted(position)
-                            }.show()
+                           // }.show()
                             adaptador = RecyclerView_Adapter(personas.getPersonas())
                             lista.adapter = adaptador
                             //getListOfPersons()
@@ -151,9 +151,12 @@ class CrudPersonas : AppCompatActivity() {
 
         val add: FloatingActionButton = findViewById(R.id.add)
         add.setOnClickListener { view ->
-            Toast.makeText(this, "Dentro del botón flotante", Toast.LENGTH_SHORT).show()
+            /*Toast.makeText(this, "Dentro del botón flotante", Toast.LENGTH_SHORT).show()
             Snackbar.make(view, "Botón para insertar", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+                .setAction("Action", null).show()*/
+            val intent2 = Intent(applicationContext, Form::class.java)
+            intent2.putExtra("titulo","Agregar usuario")
+            startActivity(intent2)
         }
 
 

@@ -12,6 +12,7 @@ class Form : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
+        var personas: Personas = Personas.instance
         var bundle = intent.extras
         var titulo = bundle!!.getString("titulo")
         var posicion = bundle!!.getInt("posicion")
@@ -30,17 +31,25 @@ class Form : AppCompatActivity() {
             name.setText(persona.nombre)
             password.setText(persona.password)
             foto = persona.foto
-        }else{
-            println("insertar")
-        }
-        btn.setOnClickListener {
-
-                var per = Persona(user.toString(), password.toString(), name.toString(), foto)
-                val i = Intent(this, MenuExample::class.java)
-                //i.putExtra("Login", Login)
+            btn.setOnClickListener {
+                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), foto)
+                personas.editPerson(per,posicion)
+                val i = Intent(this, CrudPersonas::class.java)
+                Toast.makeText(this, "Usuario editado", Toast.LENGTH_SHORT).show()
                 startActivity(i)
+                finish()
+            }
+        }else{
 
-
+            btn.setOnClickListener {
+                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293)
+                personas.addPersona(per)
+                val i = Intent(this, CrudPersonas::class.java)
+                Toast.makeText(this, "Usario agregado", Toast.LENGTH_SHORT).show()
+                startActivity(i)
+                finish()
+            }
         }
+
     }
 }
