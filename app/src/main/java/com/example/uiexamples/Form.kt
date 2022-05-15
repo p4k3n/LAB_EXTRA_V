@@ -25,6 +25,8 @@ class Form : AppCompatActivity() {
         var btn = findViewById(R.id.button) as Button
         var foto = 0
 
+
+
         if(bundle.getSerializable("usuario")!=null){
             var  persona =  bundle.getSerializable("usuario") as Persona
             user.setText(persona.user)
@@ -39,8 +41,16 @@ class Form : AppCompatActivity() {
                 startActivity(i)
                 finish()
             }
+        }else if(bundle.getSerializable("flag") != null) {
+            btn.setOnClickListener {
+                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293)
+                personas.addPersona(per)
+                val i = Intent(this, LoginExample::class.java)
+                Toast.makeText(this, "Usario registrado", Toast.LENGTH_SHORT).show()
+                startActivity(i)
+                finish()
+            }
         }else{
-
             btn.setOnClickListener {
                 var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293)
                 personas.addPersona(per)

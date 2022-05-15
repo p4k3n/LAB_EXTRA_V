@@ -22,6 +22,7 @@ class LoginExample : AppCompatActivity() {
         var et_password = findViewById(R.id.et_password) as EditText
         var btn_reset = findViewById(R.id.btn_reset) as Button
         var btn_submit = findViewById(R.id.btn_submit) as Button
+        var btn_reg = findViewById(R.id.btn_reg) as Button
 
         btn_reset.setOnClickListener {
             // clearing user_name and password edit text views on reset button click
@@ -49,6 +50,12 @@ class LoginExample : AppCompatActivity() {
                 Toast.makeText(this, "El usuario no se encuentra registrado", Toast.LENGTH_SHORT).show()
             }
 
+        }
+        btn_reg.setOnClickListener{
+            val intent2 = Intent(applicationContext, Form::class.java)
+            intent2.putExtra("flag","flag")
+            startActivity(intent2)
+            finish()
         }
 
     }

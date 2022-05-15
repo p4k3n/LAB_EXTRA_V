@@ -109,6 +109,11 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 val i = Intent(this, CrudPersonas::class.java)
                 startActivity(i)
             }
+            R.id.salir -> {
+                val i = Intent(this, LoginExample::class.java)
+                startActivity(i)
+                finish()
+            }
         }
         return true
     }
