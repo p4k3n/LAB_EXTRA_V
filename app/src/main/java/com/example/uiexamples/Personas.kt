@@ -37,9 +37,9 @@ class Personas private constructor() {
         personas?.add(persona)
     }
 
-    fun getPersona(nombre: String): Persona? {
+    fun getPersona(user: String): Persona? {
         for (p: Persona in personas!!){
-            if(p.nombre.equals(nombre)){
+            if(p.user.equals(user)){
                 return p;
             }
         }
@@ -77,5 +77,14 @@ class Personas private constructor() {
         aux.password = p.password
         aux.nombre = p.nombre
         aux.user = p.user
+    }
+    fun getIndexPerson(item: String): Int {
+        for (i in personas.indices)
+        {
+            if (personas[i].user == item) {
+                return i
+            }
+        }
+        return -1
     }
 }
