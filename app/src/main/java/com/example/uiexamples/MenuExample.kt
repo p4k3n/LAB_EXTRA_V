@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -30,6 +32,7 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private lateinit var homeFragment: HomeFragment
     private lateinit var galleryFragment: GalleryFragment
     private lateinit var slideshowFragment: SlideshowFragment
+    private lateinit var nombreUsuario: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,7 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val bundle = intent.extras
         val msg = bundle!!.getString("msg")
         val l =  bundle.getSerializable("Login") as Persona
-
+        nombreUsuario = l.nombre
         if (msg != null) {
             Toast.makeText(this, "$msg ${l.nombre} ${l.password}", Toast.LENGTH_SHORT).show()
         }
@@ -50,10 +53,15 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
+
         if(l.rol!="admin"){
             val navAk7: NavigationView = findViewById(R.id.nav_view) as NavigationView
             val nav_per: Menu = navAk7.getMenu()
             nav_per.findItem(R.id.nav_personas).setVisible(false)
+        }else{
+            val navAk7: NavigationView = findViewById(R.id.nav_view) as NavigationView
+            val nav_per: Menu = navAk7.getMenu()
+            nav_per.findItem(R.id.nav_jobApp).setVisible(false)
         }
 
         // Passing each menu ID as a set of Ids because each
@@ -109,7 +117,12 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                     .addToBackStack(null)
                     .commit()
             }
-
+            R.id.nav_jobApp -> {
+                var objForm:JobForm = JobForm(nombreUsuario ,"Smith","Street 16, Avenue 6","Street 20, Avenue 5","Barva","Heredia","11010","Costa Rica",(nombreUsuario + "@una.cr"),"506","89508209","Web developer","04/29/2022")
+                val i = Intent(this, JobApp::class.java)
+                i.putExtra( "objeto", objForm)
+                startActivity(i)
+            }
             R.id.nav_personas -> {
                 val i = Intent(this, CrudPersonas::class.java)
                 startActivity(i)
