@@ -43,7 +43,7 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val l =  bundle.getSerializable("Login") as Persona
         nombreUsuario = l.nombre
         if (msg != null) {
-            Toast.makeText(this, "$msg ${l.nombre} ${l.password}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "$msg ${l.nombre} ${l.password}", Toast.LENGTH_SHORT).show()
         }
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)

@@ -18,6 +18,7 @@ class Password : AppCompatActivity() {
         var currentPass = findViewById(R.id.currentPass) as EditText
         var newPass = findViewById(R.id.newPass) as EditText
         var btn_update = findViewById(R.id.update) as Button
+        var back = findViewById(R.id.back) as Button
 
         fun update() {
             var per = personas.getPersona(user.text.toString())
@@ -29,7 +30,7 @@ class Password : AppCompatActivity() {
                     personas.editPerson(per,i)
                     Toast.makeText(this, "Contraseña actualizada.", Toast.LENGTH_SHORT).show()
                 }else{
-                    Toast.makeText(this, "Error: La contraseña actual y la nueva no coinciden.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error: La contraseña actual no es la correcta.", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Error: No existe una persona con ese usuario.", Toast.LENGTH_SHORT).show()
@@ -37,10 +38,12 @@ class Password : AppCompatActivity() {
         }
         btn_update.setOnClickListener {
             update()
-            //val i = Intent(this, CrudPersonas::class.java)
-            //Toast.makeText(this, "Usario agregado", Toast.LENGTH_SHORT).show()
-           // startActivity(i)
-            //finish()
         }
+        back.setOnClickListener {
+            val i = Intent(this, LoginExample::class.java)
+            startActivity(i)
+            finish()
+        }
+
     }
 }
