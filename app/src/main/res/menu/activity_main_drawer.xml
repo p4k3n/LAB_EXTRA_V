@@ -9,6 +9,7 @@
                 android:icon="@drawable/home"
                 android:title="@string/menu_home"/>
 
+        <item android:title="JobApp" android:icon="@drawable/mal_ico" android:id="@+id/nav_jobApp"/>
         <item
                 android:id="@+id/nav_personas"
                 android:icon="@drawable/personas"

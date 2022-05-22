@@ -23,6 +23,7 @@ class LoginExample : AppCompatActivity() {
         var btn_reset = findViewById(R.id.btn_reset) as Button
         var btn_submit = findViewById(R.id.btn_submit) as Button
         var btn_reg = findViewById(R.id.btn_reg) as Button
+        var btn_pass = findViewById(R.id.btn_pass) as Button
 
         btn_reset.setOnClickListener {
             // clearing user_name and password edit text views on reset button click
@@ -54,5 +55,10 @@ class LoginExample : AppCompatActivity() {
             finish()
         }
 
+        btn_pass.setOnClickListener{
+            val intent3 = Intent(this, Password::class.java)
+            startActivity(intent3)
+            finish()
+        }
     }
 }
