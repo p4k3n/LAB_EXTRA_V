@@ -41,11 +41,7 @@ class LoginExample : AppCompatActivity() {
                 val i = Intent(this, MenuExample::class.java)
                 i.putExtra("msg", "MENSAJE DE Login al Menú")
                 i.putExtra("Login", Login)
-//            i.putExtra("passw", password.toString())
-                // start your next activity
                 startActivity(i)
-                // your code to validate the user_name and password combination
-                // and verify the same
             }else{
                 Toast.makeText(this, "El usuario no se encuentra registrado", Toast.LENGTH_SHORT).show()
             }

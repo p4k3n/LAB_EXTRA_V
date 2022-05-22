@@ -22,6 +22,7 @@ class Form : AppCompatActivity() {
         var user = findViewById(R.id.user) as TextView
         var name = findViewById(R.id.name) as TextView
         var password = findViewById(R.id.password) as TextView
+        var rol = "standard"
         var btn = findViewById(R.id.button) as Button
         var foto = 0
 
@@ -34,7 +35,7 @@ class Form : AppCompatActivity() {
             password.setText(persona.password)
             foto = persona.foto
             btn.setOnClickListener {
-                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), foto)
+                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), foto, rol)
                 personas.editPerson(per,posicion)
                 val i = Intent(this, CrudPersonas::class.java)
                 Toast.makeText(this, "Usuario editado", Toast.LENGTH_SHORT).show()
@@ -43,7 +44,7 @@ class Form : AppCompatActivity() {
             }
         }else if(bundle.getSerializable("flag") != null) {
             btn.setOnClickListener {
-                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293)
+                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293, rol)
                 personas.addPersona(per)
                 val i = Intent(this, LoginExample::class.java)
                 Toast.makeText(this, "Usario registrado", Toast.LENGTH_SHORT).show()
@@ -52,7 +53,7 @@ class Form : AppCompatActivity() {
             }
         }else{
             btn.setOnClickListener {
-                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293)
+                var per = Persona(user.text.toString(), password.text.toString(), name.text.toString(), 2131165293, rol)
                 personas.addPersona(per)
                 val i = Intent(this, CrudPersonas::class.java)
                 Toast.makeText(this, "Usario agregado", Toast.LENGTH_SHORT).show()

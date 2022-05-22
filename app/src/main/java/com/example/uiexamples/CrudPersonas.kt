@@ -94,7 +94,7 @@ class CrudPersonas : AppCompatActivity() {
                         position = viewHolder.adapterPosition
 
                         if(direction == ItemTouchHelper.LEFT){
-                            persona = Persona(personas.getPersonas()[position].user, personas.getPersonas()[position].password, personas.getPersonas()[position].nombre, personas.getPersonas()[position].foto)
+                            persona = Persona(personas.getPersonas()[position].user, personas.getPersonas()[position].password, personas.getPersonas()[position].nombre, personas.getPersonas()[position].foto, personas.getPersonas()[position].rol)
                             personas.deletePerson(position)
                             lista.adapter?.notifyItemRemoved(position)
 
@@ -105,7 +105,7 @@ class CrudPersonas : AppCompatActivity() {
                             adaptador = RecyclerView_Adapter(personas.getPersonas())
                             lista.adapter = adaptador
                         }else{
-                            persona = Persona(personas.getPersonas()[position].user, personas.getPersonas()[position].password, personas.getPersonas()[position].nombre, personas.getPersonas()[position].foto)
+                            persona = Persona(personas.getPersonas()[position].user, personas.getPersonas()[position].password, personas.getPersonas()[position].nombre, personas.getPersonas()[position].foto, personas.getPersonas()[position].rol)
                             archived.add(persona)
 
                             //personas.editPerson(Persona("david","123","david",2), position)

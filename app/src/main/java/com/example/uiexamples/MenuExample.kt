@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
@@ -45,15 +46,16 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Toast.makeText(this, "Dentro del botón flotante", Toast.LENGTH_SHORT).show()
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+
+        if(l.rol!="admin"){
+            val navAk7: NavigationView = findViewById(R.id.nav_view) as NavigationView
+            val nav_per: Menu = navAk7.getMenu()
+            nav_per.findItem(R.id.nav_personas).setVisible(false)
+        }
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -64,6 +66,8 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navView.setNavigationItemSelectedListener(this)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -105,6 +109,7 @@ class MenuExample : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                     .addToBackStack(null)
                     .commit()
             }
+
             R.id.nav_personas -> {
                 val i = Intent(this, CrudPersonas::class.java)
                 startActivity(i)
